@@ -1619,7 +1619,7 @@ code {
     font-size: 0.8rem;
   }
 
-  .nav a:nth-child(5) {
+  .nav a:nth-child(6) {
     display: none;
   }
 
@@ -1704,7 +1704,8 @@ code {
 }
 
 @media (max-width: 440px) {
-  .nav a:nth-child(4) {
+  .nav a:nth-child(4),
+  .nav a:nth-child(5) {
     display: none;
   }
 
@@ -1735,5 +1736,233 @@ code {
   .video-card {
     opacity: 1;
     transform: none;
+  }
+}
+
+/* ---------- 拍摄脚本 ---------- */
+.script-grid {
+  display: grid;
+  grid-template-columns: minmax(280px, 360px) 1fr;
+  gap: 26px;
+  align-items: start;
+}
+
+.script-form {
+  position: sticky;
+  top: 96px;
+  background: var(--card);
+  border: 1px solid var(--line);
+  padding: 26px 24px 24px;
+}
+
+.field + .field {
+  margin-top: 18px;
+}
+
+.field label {
+  display: block;
+  font-family: var(--mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.16em;
+  color: var(--muted);
+  margin-bottom: 8px;
+}
+
+.field select,
+.field input,
+.field textarea {
+  width: 100%;
+  border: 1px solid var(--line);
+  background: var(--paper);
+  color: var(--ink);
+  padding: 11px 12px;
+  font-family: inherit;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  border-radius: 2px;
+  transition: border-color 0.25s ease;
+}
+
+.field textarea {
+  resize: vertical;
+  min-height: 112px;
+}
+
+.field select:focus,
+.field input:focus,
+.field textarea:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.script-submit {
+  width: 100%;
+  margin-top: 22px;
+}
+
+.script-hint {
+  margin-top: 14px;
+  font-size: 0.72rem;
+  line-height: 1.8;
+  color: var(--muted);
+}
+
+.script-output {
+  min-width: 0;
+  background: var(--card);
+  border: 1px solid var(--line);
+  padding: 26px 28px 28px;
+}
+
+.script-output-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 18px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--line);
+}
+
+.script-output-head h3 {
+  font-family: var(--serif);
+  font-size: 1.18rem;
+  line-height: 1.4;
+}
+
+.script-meta {
+  margin-top: 6px;
+  font-family: var(--mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+}
+
+.script-copy {
+  flex: none;
+  border: 1px solid var(--line);
+  background: transparent;
+  color: var(--ink-2);
+  padding: 9px 16px;
+  font-size: 0.74rem;
+  letter-spacing: 0.04em;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: border-color 0.25s ease, color 0.25s ease;
+}
+
+.script-copy:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.shot-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.shot {
+  display: grid;
+  grid-template-columns: 96px 1.05fr 1.35fr;
+  gap: 18px;
+  padding: 16px 0;
+  border-bottom: 1px dashed var(--line);
+}
+
+.shot:last-child {
+  border-bottom: 0;
+}
+
+.shot-time {
+  padding-top: 3px;
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  color: var(--accent);
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+
+.shot-visual,
+.shot-voice {
+  font-size: 0.84rem;
+  line-height: 1.8;
+  color: var(--ink-2);
+}
+
+.shot-voice {
+  color: var(--ink);
+}
+
+.shot-visual b,
+.shot-voice b {
+  display: block;
+  margin-bottom: 4px;
+  font-family: var(--mono);
+  font-size: 0.6rem;
+  font-weight: 400;
+  letter-spacing: 0.14em;
+  color: var(--muted);
+}
+
+.shot-sub {
+  display: block;
+  margin-top: 6px;
+  font-size: 0.75rem;
+  color: var(--muted);
+}
+
+.script-extra {
+  display: grid;
+  gap: 16px;
+  margin-top: 22px;
+  padding-top: 20px;
+  border-top: 1px solid var(--line);
+}
+
+.script-block {
+  border-left: 2px solid var(--accent);
+  padding-left: 14px;
+}
+
+.script-block h4 {
+  margin-bottom: 6px;
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.14em;
+  color: var(--muted);
+}
+
+.script-block p {
+  font-size: 0.84rem;
+  line-height: 1.85;
+  color: var(--ink-2);
+}
+
+@media (max-width: 1080px) {
+  .script-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .script-form {
+    position: static;
+  }
+}
+
+@media (max-width: 640px) {
+  .shot {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .shot-time {
+    padding-top: 0;
+  }
+
+  .script-output {
+    padding: 20px;
+  }
+
+  .script-output-head {
+    flex-direction: column;
   }
 }

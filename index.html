@@ -77,6 +77,7 @@
         <a href="#library">内容库</a>
         <a href="#craft">创作心法</a>
         <a href="#compliance">合规拍摄</a>
+        <a href="#script">拍摄脚本</a>
         <a href="#sop">制作SOP</a>
       </nav>
       <a class="header-cta" href="#library">查看内容库 <span aria-hidden="true">→</span></a>
@@ -774,12 +775,62 @@
       </div>
     </section>
 
+    <!-- 拍摄脚本 -->
+    <section class="section" id="script">
+      <div class="container">
+        <div class="section-head reveal">
+          <div>
+            <p class="sec-index">05 — 拍摄脚本</p>
+            <h2>输入选题，<br />生成一版能拍的脚本。</h2>
+          </div>
+          <p class="sec-note">选档位、填选题与核心要点，自动生成分镜表、口播框架与字幕提示，片尾固定句一并带上。</p>
+        </div>
+
+        <div class="script-grid">
+          <form class="script-form reveal" id="scriptForm" style="--d:.04s">
+            <div class="field">
+              <label for="scriptTier">视频档位</label>
+              <select id="scriptTier" name="tier">
+                <option value="short">短视频（2–5 分钟）</option>
+                <option value="mid">中视频（5–10 分钟）</option>
+                <option value="long">长视频（15 分钟以上）</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="scriptTopic">本期选题</label>
+              <input id="scriptTopic" name="topic" type="text" value="森林图怎么读" maxlength="40" />
+            </div>
+            <div class="field">
+              <label for="scriptPoints">核心要点（每行一条）</label>
+              <textarea id="scriptPoints" name="points" rows="5">点估计与置信区间的含义
+合并效应量怎么解释
+哪些情况不适合合并</textarea>
+            </div>
+            <button class="btn btn-primary script-submit" type="submit">生成脚本</button>
+            <p class="script-hint">生成结果是结构框架，口播请按自己的习惯改写；发布前对照「04 合规与拍摄」自查一遍。</p>
+          </form>
+
+          <div class="script-output reveal" style="--d:.1s">
+            <div class="script-output-head">
+              <div>
+                <h3 id="scriptTitle">脚本预览</h3>
+                <p class="script-meta" id="scriptMeta">—</p>
+              </div>
+              <button class="script-copy" type="button" id="copyScript">复制完整脚本</button>
+            </div>
+            <ol class="shot-list" id="shotList"></ol>
+            <div class="script-extra" id="scriptExtra"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- 制作 SOP -->
     <section class="section" id="sop">
       <div class="container">
         <div class="section-head reveal">
           <div>
-            <p class="sec-index">05 — 制作 SOP</p>
+            <p class="sec-index">06 — 制作 SOP</p>
             <h2>从选题到复盘，<br />把创作流程化。</h2>
           </div>
           <p class="sec-note">稳定输出的前提不是灵感，而是流程。每个环节都有明确产出物，避免卡在某一步。</p>
@@ -832,7 +883,7 @@
     <div class="container">
       <div class="footer-top">
         <div class="footer-brand">
-          <p class="sec-index footer-index">06 — 关于</p>
+          <p class="sec-index footer-index">07 — 关于</p>
           <h2>把复杂讲简单，<br />把方法讲明白。</h2>
           <p class="footer-note">用统计说话。所有内容基于真实项目与文献，方法可复现，结论有边界。</p>
         </div>
@@ -842,6 +893,7 @@
           <a href="#library">内容库</a>
           <a href="#craft">创作心法</a>
           <a href="#compliance">合规拍摄</a>
+          <a href="#script">拍摄脚本</a>
           <a href="#sop">制作 SOP</a>
         </div>
         <div class="footer-col">
