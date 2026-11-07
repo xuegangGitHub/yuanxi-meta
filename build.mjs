@@ -133,7 +133,10 @@ if (html === before) {
 /* ---------- 更新 sitemap 的 lastmod ---------- */
 try {
   const sitemap = await readFile(sitemapPath, "utf8");
-  const today = new Date().toISOString().slice(0, 10);
+  const now = new Date();
+  const today = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}-${String(
+    now.getDate()
+  ).padStart(2, "0")}`;
   const next = sitemap.replace(/<lastmod>[^<]*<\/lastmod>/, `<lastmod>${today}</lastmod>`);
   if (next !== sitemap) await writeFile(sitemapPath, next, "utf8");
   console.log(`sitemap.xml lastmod → ${today}`);
