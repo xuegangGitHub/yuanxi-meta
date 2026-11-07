@@ -1,0 +1,9 @@
+{
+  "title": "Stata 复现一篇 Meta 分析：从数据录入到出图",
+  "type": "mid",
+  "duration": "09:24",
+  "status": "published",
+  "tag": "软件实操",
+  "desc": "完整敲一遍命令，包括效应量转换、异质性检验与森林图导出。",
+  "order": 6
+}

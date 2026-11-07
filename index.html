@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Meta分析教程｜森林图、异质性与Stata实操 - 元析Meta</title>
+  <meta name="description" content="Meta分析教程与实操笔记：森林图解读、异质性处理、Stata复现、网状Meta与GRADE分级。真人出镜，短视频讲概念、中视频走流程、长视频做项目，持续更新。" />
+  <meta name="keywords" content="Meta分析,Meta分析教程,森林图,异质性,Stata,Meta回归,网状Meta,GRADE分级,发表偏倚" />
+  <meta name="author" content="元析 Meta" />
+  <meta name="robots" content="index,follow,max-image-preview:large" />
+  <meta name="theme-color" content="#F5F1E8" />
+  <link rel="canonical" href="https://yourdomain.com/" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="元析 Meta" />
+  <meta property="og:locale" content="zh_CN" />
+  <meta property="og:title" content="Meta分析教程｜森林图、异质性与Stata实操" />
+  <meta property="og:description" content="Meta分析教程与实操笔记：森林图解读、异质性处理、Stata复现、网状Meta与GRADE分级。真人出镜，三档时长，持续更新。" />
+  <meta property="og:url" content="https://yourdomain.com/" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Meta分析教程｜森林图、异质性与Stata实操" />
+  <meta name="twitter:description" content="Meta分析教程与实操笔记：森林图解读、异质性处理、Stata复现、网状Meta与GRADE分级。" />
+
+  <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2064%2064'%3E%3Crect%20width='64'%20height='64'%20fill='%231B1813'/%3E%3Ctext%20x='32'%20y='44'%20font-size='34'%20text-anchor='middle'%20fill='%23F5F1E8'%20font-family='serif'%3E%E5%85%83%3C/text%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="styles.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "https://yourdomain.com/#website",
+        "url": "https://yourdomain.com/",
+        "name": "元析 Meta",
+        "description": "Meta 分析教程与统计学干货输出主页",
+        "inLanguage": "zh-CN"
+      },
+      {
+        "@type": "Person",
+        "@id": "https://yourdomain.com/#person",
+        "name": "元析 Meta",
+        "jobTitle": "Meta 统计分析师",
+        "description": "专注 Meta 分析、循证医学统计方法的内容创作者",
+        "knowsAbout": ["Meta分析", "森林图", "异质性", "Stata", "网状Meta", "GRADE分级"]
+      },
+      {
+        "@type": "WebPage",
+        "@id": "https://yourdomain.com/#webpage",
+        "url": "https://yourdomain.com/",
+        "name": "Meta分析教程｜森林图、异质性与Stata实操 - 元析Meta",
+        "description": "Meta分析教程与实操笔记：森林图解读、异质性处理、Stata复现、网状Meta与GRADE分级。",
+        "inLanguage": "zh-CN",
+        "isPartOf": { "@id": "https://yourdomain.com/#website" },
+        "about": { "@id": "https://yourdomain.com/#person" }
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+
+  <header class="site-header" id="siteHeader">
+    <div class="container header-inner">
+      <a class="brand" href="#top" aria-label="回到顶部">
+        <span class="brand-mark">元</span>
+        <span class="brand-text">
+          <strong>元析 Meta</strong>
+          <em>Meta分析 · 统计学干货</em>
+        </span>
+      </a>
+      <nav class="nav" aria-label="主导航">
+        <a href="#matrix">视频矩阵</a>
+        <a href="#library">内容库</a>
+        <a href="#craft">创作心法</a>
+        <a href="#compliance">合规拍摄</a>
+        <a href="#sop">制作SOP</a>
+      </nav>
+      <a class="header-cta" href="#library">查看内容库 <span aria-hidden="true">→</span></a>
+    </div>
+  </header>
+
+  <main id="top">
+
+    <!-- 首屏 -->
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow reveal"><span class="eyebrow-dot"></span>真人出镜 · 只讲能落地的方法</p>
+          <h1 class="reveal" style="--d:.08s">Meta 分析教程<br />讲成<span class="accent">人话</span>。</h1>
+          <p class="lede reveal" style="--d:.16s">一名 Meta 统计分析师的知识输出主页。短视频讲透一个概念，中视频跑通一套流程，长视频拆完一个完整项目——每一条都要求自己：无废话、可复现、能落地。</p>
+          <div class="hero-actions reveal" style="--d:.24s">
+            <a href="#library" class="btn btn-primary">浏览干货内容</a>
+            <a href="#craft" class="btn btn-ghost">知识付费拍摄要点</a>
+          </div>
+          <div class="hero-stats reveal" style="--d:.32s">
+            <div class="stat">
+              <strong>2–15<em>+</em></strong>
+              <span>分钟 · 时长分层</span>
+            </div>
+            <div class="stat">
+              <strong>真人</strong>
+              <span>全程出镜讲解</span>
+            </div>
+            <div class="stat">
+              <strong>1</strong>
+              <span>每期一个可落地方法</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-visual reveal" style="--d:.2s">
+          <figure class="plot-card">
+            <figcaption>FIGURE 01 — 随机效应模型 · 森林图</figcaption>
+            <svg class="forest" viewBox="0 0 560 380" role="img" aria-label="森林图示意图：6 项研究的效应量与置信区间，以及合并效应量菱形">
+              <text x="16" y="30" class="svg-label">STUDY</text>
+              <text x="544" y="30" text-anchor="end" class="svg-label">OR [95% CI]</text>
+              <line x1="16" y1="44" x2="544" y2="44" class="svg-rule" />
+
+              <line x1="300" y1="58" x2="300" y2="268" class="svg-null" />
+              <text x="300" y="56" text-anchor="middle" class="svg-tick">1.0</text>
+
+              <g class="svg-row">
+                <text x="16" y="76" class="svg-study">Chen 2019</text>
+                <line x1="285" y1="72" x2="360" y2="72" class="svg-ci" />
+                <line x1="285" y1="67" x2="285" y2="77" class="svg-cap" />
+                <line x1="360" y1="67" x2="360" y2="77" class="svg-cap" />
+                <rect x="313" y="67" width="10" height="10" rx="1" class="svg-sq" style="--n:1" />
+                <text x="544" y="76" text-anchor="end" class="svg-val">1.24 [0.96, 1.61]</text>
+              </g>
+
+              <g class="svg-row">
+                <text x="16" y="110" class="svg-study">Wang 2020</text>
+                <line x1="255" y1="106" x2="310" y2="106" class="svg-ci" />
+                <line x1="255" y1="101" x2="255" y2="111" class="svg-cap" />
+                <line x1="310" y1="101" x2="310" y2="111" class="svg-cap" />
+                <rect x="267" y="101" width="11" height="11" rx="1" class="svg-sq" style="--n:2" />
+                <text x="544" y="110" text-anchor="end" class="svg-val">0.82 [0.61, 1.10]</text>
+              </g>
+
+              <g class="svg-row">
+                <text x="16" y="144" class="svg-study">Liu 2021</text>
+                <line x1="288" y1="140" x2="324" y2="140" class="svg-ci" />
+                <line x1="288" y1="135" x2="288" y2="145" class="svg-cap" />
+                <line x1="324" y1="135" x2="324" y2="145" class="svg-cap" />
+                <rect x="295" y="135" width="10" height="10" rx="1" class="svg-sq" style="--n:3" />
+                <text x="544" y="144" text-anchor="end" class="svg-val">1.05 [0.88, 1.26]</text>
+              </g>
+
+              <g class="svg-row">
+                <text x="16" y="178" class="svg-study">Zhao 2022</text>
+                <line x1="300" y1="174" x2="390" y2="174" class="svg-ci" />
+                <line x1="300" y1="169" x2="300" y2="179" class="svg-cap" />
+                <line x1="390" y1="169" x2="390" y2="179" class="svg-cap" />
+                <rect x="347" y="168" width="12" height="12" rx="1" class="svg-sq" style="--n:4" />
+                <text x="544" y="178" text-anchor="end" class="svg-val">1.42 [1.02, 1.98]</text>
+              </g>
+
+              <g class="svg-row">
+                <text x="16" y="212" class="svg-study">Sun 2023</text>
+                <line x1="265" y1="208" x2="318" y2="208" class="svg-ci" />
+                <line x1="265" y1="203" x2="265" y2="213" class="svg-cap" />
+                <line x1="318" y1="203" x2="318" y2="213" class="svg-cap" />
+                <rect x="280" y="203" width="9" height="9" rx="1" class="svg-sq" style="--n:5" />
+                <text x="544" y="212" text-anchor="end" class="svg-val">0.94 [0.72, 1.23]</text>
+              </g>
+
+              <g class="svg-row">
+                <text x="16" y="246" class="svg-study">Zhou 2024</text>
+                <line x1="297" y1="242" x2="336" y2="242" class="svg-ci" />
+                <line x1="297" y1="237" x2="297" y2="247" class="svg-cap" />
+                <line x1="336" y1="237" x2="336" y2="247" class="svg-cap" />
+                <rect x="314" y="236" width="12" height="12" rx="1" class="svg-sq" style="--n:6" />
+                <text x="544" y="246" text-anchor="end" class="svg-val">1.17 [1.01, 1.36]</text>
+              </g>
+
+              <line x1="16" y1="268" x2="544" y2="268" class="svg-rule" />
+              <text x="16" y="294" class="svg-label">POOLED</text>
+              <polygon points="285,300 310,290 335,300 310,310" class="svg-diamond" />
+              <text x="544" y="304" text-anchor="end" class="svg-val svg-val-strong">1.09 [1.01, 1.18]</text>
+
+              <line x1="180" y1="330" x2="420" y2="330" class="svg-rule" />
+              <line x1="180" y1="325" x2="180" y2="335" class="svg-cap" />
+              <line x1="300" y1="325" x2="300" y2="335" class="svg-cap" />
+              <line x1="420" y1="325" x2="420" y2="335" class="svg-cap" />
+              <text x="180" y="350" text-anchor="middle" class="svg-tick">0.5</text>
+              <text x="300" y="350" text-anchor="middle" class="svg-tick">1.0</text>
+              <text x="420" y="350" text-anchor="middle" class="svg-tick">2.0</text>
+              <text x="180" y="372" text-anchor="start" class="svg-tick svg-faint">Favours control</text>
+              <text x="420" y="372" text-anchor="end" class="svg-tick svg-faint">Favours treatment</text>
+            </svg>
+            <div class="plot-meta">
+              <span>6 studies</span>
+              <span>I² = 42%</span>
+              <span>τ² = 0.031</span>
+            </div>
+          </figure>
+          <div class="hero-badge"><strong>真人</strong>出镜 · 每期精讲</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 滚动词条 -->
+    <div class="ticker" aria-hidden="true">
+      <div class="ticker-track">
+        <div class="ticker-group">
+          <span>随机效应</span><i>✦</i><span>异质性 I²</span><i>✦</i><span>发表偏倚</span><i>✦</i><span>亚组分析</span><i>✦</i><span>Meta 回归</span><i>✦</i><span>敏感性分析</span><i>✦</i><span>漏斗图</span><i>✦</i><span>网状 Meta</span><i>✦</i><span>GRADE 分级</span><i>✦</i><span>剂量-反应</span><i>✦</i><span>森林图</span><i>✦</i><span>敏感度合并</span><i>✦</i>
+        </div>
+        <div class="ticker-group">
+          <span>随机效应</span><i>✦</i><span>异质性 I²</span><i>✦</i><span>发表偏倚</span><i>✦</i><span>亚组分析</span><i>✦</i><span>Meta 回归</span><i>✦</i><span>敏感性分析</span><i>✦</i><span>漏斗图</span><i>✦</i><span>网状 Meta</span><i>✦</i><span>GRADE 分级</span><i>✦</i><span>剂量-反应</span><i>✦</i><span>森林图</span><i>✦</i><span>敏感度合并</span><i>✦</i>
+        </div>
+      </div>
+    </div>
+
+    <!-- 视频矩阵 -->
+    <section class="section" id="matrix">
+      <div class="container">
+        <div class="section-head reveal">
+          <div>
+            <p class="sec-index">01 — 视频矩阵</p>
+            <h2>Meta 分析视频教程：<br />三档时长，三种讲法。</h2>
+          </div>
+          <p class="sec-note">时长不是剪出来的，是内容结构决定的。每条视频开拍前，先确定它属于哪一档。</p>
+        </div>
+
+        <div class="matrix-grid">
+          <article class="matrix-card reveal" style="--c:var(--accent);--d:.05s">
+            <header>
+              <span class="matrix-type">短视频</span>
+              <span class="matrix-time">02–05 MIN</span>
+            </header>
+            <h3>概念破冰，单点打透</h3>
+            <p class="matrix-desc">一条只解决一个问题。用一张图、一个例子、一句结论，把某个概念讲清楚，建立“这个人讲得明白”的初步印象。</p>
+            <ul class="matrix-list">
+              <li><span>结构</span>钩子 15s → 例子 2min → 结论 20s</li>
+              <li><span>节奏</span>每周 2 条，稳定刷脸</li>
+              <li><span>典型</span>森林图怎么看 / I² 怎么读</li>
+            </ul>
+            <footer>目标 · 涨粉与信任</footer>
+          </article>
+
+          <article class="matrix-card reveal" style="--c:var(--gold);--d:.12s">
+            <header>
+              <span class="matrix-type">中视频</span>
+              <span class="matrix-time">05–10 MIN</span>
+            </header>
+            <h3>流程复现，手把手</h3>
+            <p class="matrix-desc">软件操作与分析方法完整走一遍，屏幕录制 + 真人画中画。观众看完，能自己复现出同样的结果。</p>
+            <ul class="matrix-list">
+              <li><span>结构</span>问题 30s → 操作演示 → 结果检查 → 避坑</li>
+              <li><span>节奏</span>每两周 1 条，重制作</li>
+              <li><span>典型</span>Stata 复现 Meta 分析 / 亚组分析</li>
+            </ul>
+            <footer>目标 · 建立专业信任</footer>
+          </article>
+
+          <article class="matrix-card reveal" style="--c:var(--ink);--d:.19s">
+            <header>
+              <span class="matrix-type">长视频</span>
+              <span class="matrix-time">15+ MIN</span>
+            </header>
+            <h3>项目实战，系统交付</h3>
+            <p class="matrix-desc">从选题到成稿的完整项目拆解，配套讲义与练习数据，适配付费课程与训练营的转化场景。</p>
+            <ul class="matrix-list">
+              <li><span>结构</span>目标 → 全流程演示 → 复盘 → 作业</li>
+              <li><span>节奏</span>每月 1 条，精品化</li>
+              <li><span>典型</span>完整 Meta 分析实战 / 网状 Meta</li>
+            </ul>
+            <footer>目标 · 付费转化</footer>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 内容库 -->
+    <section class="section section-alt" id="library">
+      <div class="container">
+        <div class="section-head reveal">
+          <div>
+            <p class="sec-index">02 — 内容库</p>
+            <h2>Meta 分析内容库：<br />可查、可复用。</h2>
+          </div>
+          <p class="sec-note">按视频形态归档。发布后补充数据复盘，制作中的内容保留进度，选题池持续沉淀真实问题。</p>
+        </div>
+
+        <!-- TABS_START -->
+        <div class="tabs reveal" role="tablist" aria-label="按视频类型筛选">
+          <button class="tab is-active" data-filter="all" role="tab" aria-selected="true">全部<span class="tab-count">14</span></button>
+          <button class="tab" data-filter="short" role="tab" aria-selected="false">短视频<span class="tab-count">5</span></button>
+          <button class="tab" data-filter="mid" role="tab" aria-selected="false">中视频<span class="tab-count">5</span></button>
+          <button class="tab" data-filter="long" role="tab" aria-selected="false">长视频<span class="tab-count">4</span></button>
+        </div>
+        <!-- TABS_END -->
+
+        <!-- VIDEO_GRID_START -->
+        <div class="video-grid" id="videoGrid" aria-live="polite">
+          <article class="video-card" data-type="short" style="--d:0ms">
+            <div class="video-top">
+              <span class="type-dot short">短视频</span>
+              <span class="video-duration">04:12</span>
+              <span class="status is-published">已发布</span>
+            </div>
+            <h3>森林图三分钟入门：方块、横线、菱形分别是什么</h3>
+            <p>用一张真实的森林图，讲清点估计、置信区间与合并效应量的读法。</p>
+            <div class="video-foot">
+              <span>#图表解读</span>
+              <span class="arrow" aria-hidden="true">↗</span>
+            </div>
+          </article>
+
+          <article class="video-card" data-type="short" style="--d:55ms">
+            <div class="video-top">
+              <span class="type-dot short">短视频</span>
+              <span class="video-duration">03:48</span>
+              <span class="status is-published">已发布</span>
+            </div>
+            <h3>I² 超过 75%，还能合并吗？</h3>
+            <p>从方法学异质性与统计异质性两个层面判断，而不是死盯一个阈值。</p>
+            <div class="video-foot">
+              <span>#异质性</span>
+              <span class="arrow" aria-hidden="true">↗</span>
+            </div>
+          </article>
+
+          <article class="video-card" data-type="short" style="--d:110ms">
+            <div class="video-top">
+              <span class="type-dot short">短视频</span>
+              <span class="video-duration">04:36</span>
+              <span class="status is-published">已发布</span>
+            </div>
+            <h3>漏斗图不对称 = 发表偏倚？三个常见误判</h3>
+            <p>漏斗图只是线索，还要结合 Egger 检验与效应量分布一起看。</p>
+            <div class="video-foot">
+              <span>#发表偏倚</span>
+              <span class="arrow" aria-hidden="true">↗</span>
+            </div>
+          </article>
+
+          <article class="video-card" data-type="short" style="--d:165ms">
+            <div class="video-top">
+              <span class="type-dot short">短视频</span>
+              <span class="video-duration">03:05</span>
+              <span class="status is-production">制作中</span>
+            </div>
+            <h3>P = 0.06 的边缘结果，Meta 分析该怎么读</h3>
+            <p>置信区间、样本量与实际意义，比一个 0.05 的阈值更重要。</p>
+            <div class="video-foot">
+              <span>#结果解读</span>
+              <span class="arrow" aria-hidden="true">↗</span>
+            </div>
+          </article>
+
+          <article class="video-card" data-type="short" style="--d:220ms">
+            <div class="video-top">
+              <span class="type-dot short">短视频</span>
+              <span class="video-duration">04:58</span>
+              <span class="status is-idea">选题池</span>
+            </div>
+            <h3>固定效应 vs 随机效应：一个例子看懂区别</h3>
+            <p>用同一组数据跑两种模型，对比权重分配与置信区间的变化。</p>
+            <div class="video-foot">
+              <span>#模型选择</span>
+              <span class="arrow" aria-hidden="true">↗</span>
+            </div>
+          </article>
+
+          <article class="video-card" data-type="mid" style="--d:0ms">
+            <div class="video-top">
+              <span class="type-dot mid">中视频</span>
+              <span class="video-duration">09:24</span>
+              <span class="status is-published">已发布</span>
+            </div>
+            <h3>Stata 复现一篇 Meta 分析：从数据录入到出图</h3>
+            <p>完整敲一遍命令，包括效应量转换、异质性检验与森林图导出。</p>
+            <div class="video-foot">
+              <span>#软件实操</span>
+              <span class="arrow" aria-hidden="true">↗</span>
+            </div>
+          </article>
+
+          <article class="video-card" data-type="mid" style="--d:55ms">
+            <div class="video-top">
+              <span class="type-dot mid">中视频</span>
+              <span class="video-duration">08:16</span>
+              <span class="status is-production">制作中</span>
+            </div>
+            <h3>异质性从哪来：亚组分析与 Meta 回归实操</h3>
+            <p>怎样提出可检验的异质性来源假设，以及结果该怎么解释。</p>
+            <div class="video-foot">
+              <span>#异质性</span>
+              <span class="arrow" aria-hidden="true">↗</span>
+            </div>
+          </article>
+
+          <article class="video-card" data-type="mid" style="--d:110ms">
+            <div class="video-top">
+              <span class="type-dot mid">中视频</span>
+              <span class="video-duration">07:02</span>
+              <span class="status is-idea">选题池</span>
+            </div>
+            <h3>敏感性分析怎么做才不算“凑数”</h3>
+            <p>逐一剔除、不同模型、不同效应量指标，三种思路的适用场景。</p>
+            <div class="video-foot">
+              <span>#敏感性分析</span>
+              <span class="arrow" aria-hidden="true">↗</span>
+            </div>
+          </article>
+
+          <article class="video-card" data-type="mid" style="--d:165ms">
+            <div class="video-top">
+              <span class="type-dot mid">中视频</span>
+              <span class="video-duration">06:45</span>
+              <span class="status is-idea">选题池</span>
+            </div>
+            <h3>文献检索式怎么写：PubMed 与 Embase 策略</h3>
+            <p>从 PICO 拆词到主题词与自由词组合，给出一份可套用的检索式。</p>
+            <div class="video-foot">
+              <span>#检索</span>
+              <span class="arrow" aria-hidden="true">↗</span>
+            </div>
+          </article>
+
+          <article class="video-card" data-type="mid" style="--d:220ms">
+            <div class="video-top">
+              <span class="type-dot mid">中视频</span>
+              <span class="video-duration">08:50</span>
+              <span class="status is-idea">选题池</span>
+            </div>
+            <h3>GRADE 证据分级：把结论说得靠谱</h3>
+            <p>五个降级因素逐条演示，让讨论部分的措辞有据可依。</p>
+            <div class="video-foot">
+              <span>#证据分级</span>
+              <span class="arrow" aria-hidden="true">↗</span>
+            </div>
+          </article>
+
+          <article class="video-card" data-type="long" style="--d:0ms">
+            <div class="video-top">
+              <span class="type-dot long">长视频</span>
+              <span class="video-duration">32:10</span>
+              <span class="status is-production">制作中</span>
+            </div>
+            <h3>从选题到成稿：一篇 Meta 分析的全流程拆解</h3>
+            <p>选题、注册、检索、提取、分析、写作，完整项目一次讲透。</p>
+            <div class="video-foot">
+              <span>#项目实战</span>
+              <span class="arrow" aria-hidden="true">↗</span>
+            </div>
+          </article>
+
+          <article class="video-card" data-type="long" style="--d:55ms">
+            <div class="video-top">
+              <span class="type-dot long">长视频</span>
+              <span class="video-duration">24:38</span>
+              <span class="status is-idea">选题池</span>
+            </div>
+            <h3>网状 Meta 分析入门：间接比较与一致性检验</h3>
+            <p>从直接比较到间接比较的推导，配一套可复现的 R 代码。</p>
+            <div class="video-foot">
+              <span>#进阶方法</span>
+              <span class="arrow" aria-hidden="true">↗</span>
+            </div>
+          </article>
+
+          <article class="video-card" data-type="long" style="--d:110ms">
+            <div class="video-top">
+              <span class="type-dot long">长视频</span>
+              <span class="video-duration">21:05</span>
+              <span class="status is-idea">选题池</span>
+            </div>
+            <h3>剂量-反应 Meta 分析：模型选择与图形解读</h3>
+            <p>线性与非线性模型的选择依据，以及曲线图的正确读法。</p>
+            <div class="video-foot">
+              <span>#进阶方法</span>
+              <span class="arrow" aria-hidden="true">↗</span>
+            </div>
+          </article>
+
+          <article class="video-card" data-type="long" style="--d:165ms">
+            <div class="video-top">
+              <span class="type-dot long">长视频</span>
+              <span class="video-duration">26:44</span>
+              <span class="status is-idea">选题池</span>
+            </div>
+            <h3>敏感度与特异度合并：双变量模型详解</h3>
+            <p>敏感度、特异度与 SROC 曲线，讲清双变量模型的输出结果。</p>
+            <div class="video-foot">
+              <span>#进阶方法</span>
+              <span class="arrow" aria-hidden="true">↗</span>
+            </div>
+          </article>
+        </div>
+        <!-- VIDEO_GRID_END -->
+      </div>
+    </section>
+
+    <!-- 创作心法 -->
+    <section class="section" id="craft">
+      <div class="container craft-grid">
+        <div class="craft-intro reveal">
+          <p class="sec-index">03 — 创作心法</p>
+          <h2>知识付费视频拍摄：<br />拍前先过这 8 关。</h2>
+          <p class="craft-lede">干货视频的竞争力不在设备，而在“信息密度 × 可信度 × 交付感”。以下 8 条，是每条视频发布前逐项检查的清单。</p>
+          <div class="craft-quote">
+            <span>先想清楚</span>
+            观众先愿意为你的内容花 15 分钟，才会愿意为你的课程花钱。
+          </div>
+        </div>
+
+        <div class="accordion reveal">
+          <details class="acc" open>
+            <summary>
+              <span class="acc-num">01</span>
+              <span class="acc-title">选题：卖结果，不卖知识量</span>
+              <span class="acc-icon" aria-hidden="true"></span>
+            </summary>
+            <div class="acc-body">
+              <ul>
+                <li>学员付费是为了“少走弯路拿到结果”，不是来听你展示知识储备。</li>
+                <li>选题公式：具体场景 + 可量化结果 + 时间承诺。例：用 30 分钟，把 Meta 分析的异质性讲清楚并给出处理方案。</li>
+                <li>先验证需求：评论区高频问题、反复出现的提问、同类热门视频的评论区，都是选题池。</li>
+              </ul>
+            </div>
+          </details>
+
+          <details class="acc">
+            <summary>
+              <span class="acc-num">02</span>
+              <span class="acc-title">脚本：30 秒钩子，四段推进</span>
+              <span class="acc-icon" aria-hidden="true"></span>
+            </summary>
+            <div class="acc-body">
+              <ul>
+                <li>开场 30 秒需要回答三件事：看完能得到什么、为什么是你讲、需要什么基础。</li>
+                <li>正文按“问题 → 方法 → 结果 → 避坑”推进，每 2–3 分钟给一个记忆点。</li>
+                <li>结尾给明确动作：使用配套模板、完成练习、进入下一集，不要只说“记得关注”。</li>
+              </ul>
+            </div>
+          </details>
+
+          <details class="acc">
+            <summary>
+              <span class="acc-num">03</span>
+              <span class="acc-title">出镜：镜头感是可以练出来的</span>
+              <span class="acc-icon" aria-hidden="true"></span>
+            </summary>
+            <div class="acc-body">
+              <ul>
+                <li>机位与视线平齐，镜头放在眼睛高度；看镜头，而不是看屏幕里的自己。</li>
+                <li>语速控制在每分钟 240–280 字，关键结论前停半秒。</li>
+                <li>手势落在关键词上；不抱臂、不频繁摸头发，减少无意义小动作。</li>
+              </ul>
+            </div>
+          </details>
+
+          <details class="acc">
+            <summary>
+              <span class="acc-num">04</span>
+              <span class="acc-title">声音：先听得清，再谈画面</span>
+              <span class="acc-icon" aria-hidden="true"></span>
+            </summary>
+            <div class="acc-body">
+              <ul>
+                <li>领夹麦或近距离电容麦，录音峰值控制在 -12dB 到 -6dB。</li>
+                <li>房间做基础吸音（窗帘、地毯、衣柜前），比换相机更能提升质感。</li>
+                <li>口误不用重录整段，停顿两秒后重说，剪辑时拼接更自然。</li>
+              </ul>
+            </div>
+          </details>
+
+          <details class="acc">
+            <summary>
+              <span class="acc-num">05</span>
+              <span class="acc-title">画面：让图表成为主角</span>
+              <span class="acc-icon" aria-hidden="true"></span>
+            </summary>
+            <div class="acc-body">
+              <ul>
+                <li>主光 45° 柔光，人物与背景分离；避免顶光与背光剪影。</li>
+                <li>屏幕录制字号不小于 28px，关键步骤放大 + 高亮 + 字幕标注。</li>
+                <li>每 20–30 秒做一次画面变化：屏幕特写、景别变化、字卡总结。</li>
+              </ul>
+            </div>
+          </details>
+
+          <details class="acc">
+            <summary>
+              <span class="acc-num">06</span>
+              <span class="acc-title">节奏：按信息密度剪，不按时间剪</span>
+              <span class="acc-icon" aria-hidden="true"></span>
+            </summary>
+            <div class="acc-body">
+              <ul>
+                <li>删掉语气词、长停顿和重复解释，成片节奏要比你想象中快 20%。</li>
+                <li>一个知识点配一个例子；没有例子的抽象概念，删掉或补例子。</li>
+                <li>保留适度“思考停顿”，全程无停顿反而让观众疲劳。</li>
+              </ul>
+            </div>
+          </details>
+
+          <details class="acc">
+            <summary>
+              <span class="acc-num">07</span>
+              <span class="acc-title">转化：把钩子埋进内容，而不是贴在结尾</span>
+              <span class="acc-icon" aria-hidden="true"></span>
+            </summary>
+            <div class="acc-body">
+              <ul>
+                <li>公开内容讲清“是什么、怎么看”，系统课程交付“怎么做、做对”。</li>
+                <li>工具清单与模板放在主页合集和往期笔记，互动留在评论区；不要每条视频都硬广。</li>
+                <li>用真实案例说话：学员的前后对比，比话术更有说服力。</li>
+              </ul>
+            </div>
+          </details>
+
+          <details class="acc">
+            <summary>
+              <span class="acc-num">08</span>
+              <span class="acc-title">合规：专业内容的底线</span>
+              <span class="acc-icon" aria-hidden="true"></span>
+            </summary>
+            <div class="acc-body">
+              <ul>
+                <li>引用的文献、数据与软件输出均标注来源；案例数据做脱敏处理。</li>
+                <li>不做发表结果承诺，不使用夸大的效果描述。</li>
+                <li>涉及医学内容时，统一使用固定免责声明，说明仅用于科研方法学习。</li>
+              </ul>
+            </div>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- 合规与拍摄 -->
+    <section class="section section-alt" id="compliance">
+      <div class="container">
+        <div class="section-head reveal">
+          <div>
+            <p class="sec-index">04 — 合规与拍摄</p>
+            <h2>先过合规，<br />再谈表达。</h2>
+          </div>
+          <p class="sec-note">平台对科研培训类内容审核严格。文案按四类风险逐条替换，拍摄按统一参数执行，减少返工。</p>
+        </div>
+
+        <div class="compliance-grid">
+          <article class="risk-card reveal" style="--d:.03s">
+            <div class="risk-head">
+              <span class="risk-idx">A</span>
+              <h3>极限与夸大表达</h3>
+            </div>
+            <p>不用排名类、结果承诺类词汇描述效果。优点写成可验证的观察，而不是结论。</p>
+            <ul class="chips">
+              <li>常用</li>
+              <li>较多研究采用</li>
+              <li>实用性较高</li>
+              <li>比较稳妥</li>
+              <li>参考性较强</li>
+              <li>适合新手学习</li>
+            </ul>
+            <p class="risk-note">封面与标题同样适用，效果描述保持克制。</p>
+          </article>
+
+          <article class="risk-card reveal" style="--d:.08s">
+            <div class="risk-head">
+              <span class="risk-idx">B</span>
+              <h3>学术投稿相关表述</h3>
+            </div>
+            <p>不承诺审稿或发表结果，把重点放在方法与流程的学习上。</p>
+            <ul class="chips">
+              <li>学习投稿流程</li>
+              <li>掌握返修思路</li>
+              <li>学习规范写作</li>
+              <li>理解分区规则</li>
+              <li>学习数据分析方法</li>
+            </ul>
+            <p class="risk-note">期刊名与分区信息放在正文讲清适用范围，不放大字，不做结果承诺。</p>
+          </article>
+
+          <article class="risk-card reveal" style="--d:.13s">
+            <div class="risk-head">
+              <span class="risk-idx">C</span>
+              <h3>医疗与研究结论边界</h3>
+            </div>
+            <p>不指向具体医学问题，不做效果判断，不把研究模型说成个体判断工具。</p>
+            <ul class="chips">
+              <li>人群研究中的关联探索</li>
+              <li>流行病学层面的关联分析</li>
+              <li>文献中的研究结论</li>
+              <li>科研层面的数据挖掘</li>
+            </ul>
+            <p class="risk-note">涉及医学内容时，统一使用下方固定免责声明。</p>
+          </article>
+
+          <article class="risk-card reveal" style="--d:.18s">
+            <div class="risk-head">
+              <span class="risk-idx">D</span>
+              <h3>导流与互动引导</h3>
+            </div>
+            <p>不做资料索取式引导，所有互动留在公开评论区与主页合集。</p>
+            <ul class="chips">
+              <li>主页有合集</li>
+              <li>相关内容在往期笔记</li>
+              <li>评论区交流思路</li>
+            </ul>
+            <p class="risk-note">不引导添加站外联系方式，不在评论区做资料索取。</p>
+          </article>
+        </div>
+
+        <div class="disclaimer reveal">
+          <div>
+            <span class="disclaimer-label">固定免责声明 · 视频片尾 / 封面小字</span>
+            <p>本内容仅为医学科研统计方法教学，仅供科研学习参考，不构成临床诊疗、投稿录用承诺。</p>
+          </div>
+          <button class="copy-btn" id="copyDisclaimer" type="button">复制文案</button>
+        </div>
+
+        <div class="shoot">
+          <div class="shoot-head reveal">
+            <h3>拍摄规范</h3>
+            <span>设备 · 光线 · 机位 · 景别</span>
+          </div>
+
+          <dl class="spec-grid reveal">
+            <div class="spec">
+              <dt>画面比例</dt>
+              <dd>9:16 竖版，平台主版式</dd>
+            </div>
+            <div class="spec">
+              <dt>画质帧率</dt>
+              <dd>4K / 2K，30 帧，导出码率拉高</dd>
+            </div>
+            <div class="spec">
+              <dt>收音</dt>
+              <dd>安静室内拍摄，远离空调与回声墙</dd>
+            </div>
+            <div class="spec">
+              <dt>灯光</dt>
+              <dd>正面柔光，避免顶光与阴阳脸；窗边自然光优先</dd>
+            </div>
+            <div class="spec">
+              <dt>美颜</dt>
+              <dd>关闭重度磨皮，保持清晰与专业感</dd>
+            </div>
+            <div class="spec">
+              <dt>运镜</dt>
+              <dd>三脚架固定机位，减少推拉摇移</dd>
+            </div>
+          </dl>
+
+          <div class="shoot-cols">
+            <article class="shoot-card reveal">
+              <h4>机位与构图</h4>
+              <ul>
+                <li>镜头与人眼平齐，九宫格构图。</li>
+                <li>人物放在左或右三分线，头顶留白。</li>
+                <li>口播与录屏按段落切换，避免长时间单一脸部画面。</li>
+              </ul>
+            </article>
+            <article class="shoot-card reveal" style="--d:.06s">
+              <h4>景别搭配</h4>
+              <ul>
+                <li>短平快版本（约 2 分钟）：半身中景为主。</li>
+                <li>穿插电脑屏幕特写，重点截图与实操流程停留 2–4 秒，字幕同步重点。</li>
+                <li>长教学版本（约 5 分钟）：中景口播 + 操作视角录屏分镜切换，一段讲解接一段演示。</li>
+              </ul>
+            </article>
+          </div>
+
+          <p class="shoot-foot reveal">科研知识号：稳定优先于花哨。机位、灯光、收音一次固定，后续只换内容。</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 制作 SOP -->
+    <section class="section" id="sop">
+      <div class="container">
+        <div class="section-head reveal">
+          <div>
+            <p class="sec-index">05 — 制作 SOP</p>
+            <h2>从选题到复盘，<br />把创作流程化。</h2>
+          </div>
+          <p class="sec-note">稳定输出的前提不是灵感，而是流程。每个环节都有明确产出物，避免卡在某一步。</p>
+        </div>
+
+        <ol class="sop">
+          <li class="reveal" style="--d:.02s">
+            <span class="sop-num">01</span>
+            <h3>选题池</h3>
+            <p>从评论区和后台留言收集真实问题，每周沉淀 3 个候选题。</p>
+            <span class="sop-out">产出：选题卡</span>
+          </li>
+          <li class="reveal" style="--d:.08s">
+            <span class="sop-num">02</span>
+            <h3>脚本</h3>
+            <p>一页纸写清钩子、结构、例子、结论与行动指令。</p>
+            <span class="sop-out">产出：逐字稿 / 大纲</span>
+          </li>
+          <li class="reveal" style="--d:.14s">
+            <span class="sop-num">03</span>
+            <h3>拍摄</h3>
+            <p>集中录制：一次布光，连拍 2–3 条，减少切换成本。</p>
+            <span class="sop-out">产出：视频素材</span>
+          </li>
+          <li class="reveal" style="--d:.2s">
+            <span class="sop-num">04</span>
+            <h3>剪辑</h3>
+            <p>先粗剪信息结构，再精剪节奏与字幕，收尾调色混音。</p>
+            <span class="sop-out">产出：成片</span>
+          </li>
+          <li class="reveal" style="--d:.26s">
+            <span class="sop-num">05</span>
+            <h3>发布</h3>
+            <p>封面三选一，标题含关键词，固定发布时间培养习惯。</p>
+            <span class="sop-out">产出：发布页</span>
+          </li>
+          <li class="reveal" style="--d:.32s">
+            <span class="sop-num">06</span>
+            <h3>复盘</h3>
+            <p>看 3 秒完播、完播率、收藏率与转化路径，一次只改一个变量。</p>
+            <span class="sop-out">产出：复盘笔记</span>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <p class="sec-index footer-index">06 — 关于</p>
+          <h2>把复杂讲简单，<br />把方法讲明白。</h2>
+          <p class="footer-note">用统计说话。所有内容基于真实项目与文献，方法可复现，结论有边界。</p>
+        </div>
+        <div class="footer-col">
+          <h4>站内导航</h4>
+          <a href="#matrix">视频矩阵</a>
+          <a href="#library">内容库</a>
+          <a href="#craft">创作心法</a>
+          <a href="#compliance">合规拍摄</a>
+          <a href="#sop">制作 SOP</a>
+        </div>
+        <div class="footer-col">
+          <h4>内容平台</h4>
+          <a href="#top">小红书</a>
+          <a href="#top">B 站</a>
+          <a href="#top">视频号</a>
+          <a href="#top" class="footer-back">回到顶部 ↑</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2026 元析 Meta · 用统计说话</span>
+        <span>内容为科研方法分享，引用请注明来源</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,64 @@
+content:
+  - name: videos
+    label: 内容库
+    type: collection
+    path: content/videos
+    format: json
+    filename: "{primary}.json"
+    view:
+      primary: title
+      sort: order
+      order: asc
+    fields:
+      - name: title
+        label: 标题
+        type: string
+        required: true
+        description: 直接写成视频标题，会出现在卡片上
+      - name: type
+        label: 视频档位
+        type: select
+        required: true
+        options:
+          values:
+            - name: short
+              label: 短视频（2–5 分钟）
+            - name: mid
+              label: 中视频（5–10 分钟）
+            - name: long
+              label: 长视频（15 分钟以上）
+      - name: duration
+        label: 时长
+        type: string
+        required: true
+        pattern:
+          regex: "^[0-9]{1,2}:[0-9]{2}$"
+          message: 请使用 mm:ss 格式，例如 04:12
+      - name: status
+        label: 状态
+        type: select
+        required: true
+        options:
+          values:
+            - name: published
+              label: 已发布
+            - name: production
+              label: 制作中
+            - name: idea
+              label: 选题池
+      - name: tag
+        label: 标签
+        type: string
+        required: true
+        description: 不需要写 # 号，例如 图表解读
+      - name: desc
+        label: 简介
+        type: text
+        required: true
+        options:
+          maxlength: 120
+      - name: order
+        label: 排序
+        type: number
+        required: true
+        description: 数字越小越靠前；同一档位内按此排序
