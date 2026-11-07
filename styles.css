@@ -1966,3 +1966,150 @@ code {
     flex-direction: column;
   }
 }
+
+/* ---------- 选题池 ---------- */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.idea-board {
+  margin-top: 30px;
+  background: var(--card);
+  border: 1px solid var(--line);
+  padding: 26px 28px 22px;
+}
+
+.idea-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--line);
+}
+
+.idea-head h3 {
+  font-family: var(--serif);
+  font-size: 1.16rem;
+}
+
+.idea-sub {
+  max-width: 42em;
+  margin-top: 6px;
+  font-size: 0.78rem;
+  line-height: 1.75;
+  color: var(--muted);
+}
+
+.idea-form {
+  display: flex;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.idea-form input {
+  flex: 1;
+  min-width: 0;
+  border: 1px solid var(--line);
+  background: var(--paper);
+  color: var(--ink);
+  padding: 11px 12px;
+  font-family: inherit;
+  font-size: 0.88rem;
+  border-radius: 2px;
+  transition: border-color 0.25s ease;
+}
+
+.idea-form input:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.idea-form .btn {
+  flex: none;
+}
+
+.idea-list {
+  list-style: none;
+  margin: 16px 0 0;
+  padding: 0;
+}
+
+.idea-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 2px;
+  border-bottom: 1px dashed var(--line);
+}
+
+.idea-item:last-child {
+  border-bottom: 0;
+}
+
+.idea-mark {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  color: var(--accent);
+}
+
+.idea-text {
+  flex: 1;
+  font-size: 0.88rem;
+  line-height: 1.7;
+  color: var(--ink);
+}
+
+.idea-date {
+  font-family: var(--mono);
+  font-size: 0.66rem;
+  color: var(--muted);
+  letter-spacing: 0.06em;
+}
+
+.idea-del {
+  border: 0;
+  background: transparent;
+  padding: 4px 6px;
+  font-size: 1rem;
+  line-height: 1;
+  color: var(--muted);
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.idea-del:hover {
+  color: var(--accent);
+}
+
+.idea-empty {
+  margin-top: 14px;
+  font-size: 0.78rem;
+  color: var(--muted);
+}
+
+@media (max-width: 640px) {
+  .idea-board {
+    padding: 20px;
+  }
+
+  .idea-head {
+    flex-direction: column;
+  }
+
+  .idea-form {
+    flex-direction: column;
+  }
+
+  .idea-form .btn {
+    width: 100%;
+  }
+}

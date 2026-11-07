@@ -495,6 +495,31 @@
           </article>
         </div>
         <!-- VIDEO_GRID_END -->
+
+        <div class="idea-board reveal" style="--d:.08s">
+          <div class="idea-head">
+            <div>
+              <h3>选题池</h3>
+              <p class="idea-sub">想到什么先记下来，攒够三条再决定拍哪一条。记录只保存在这台电脑的浏览器里。</p>
+            </div>
+            <button class="script-copy" type="button" id="exportIdeas">复制选题清单</button>
+          </div>
+
+          <form class="idea-form" id="ideaForm">
+            <label class="visually-hidden" for="ideaInput">输入选题</label>
+            <input
+              id="ideaInput"
+              type="text"
+              maxlength="60"
+              autocomplete="off"
+              placeholder="一句话写下选题，例如：亚组分析怎么设计才不牵强"
+            />
+            <button class="btn btn-primary" type="submit">加入选题池</button>
+          </form>
+
+          <ul class="idea-list" id="ideaList"></ul>
+          <p class="idea-empty" id="ideaEmpty">还没有记录，先写一条试试。</p>
+        </div>
       </div>
     </section>
 

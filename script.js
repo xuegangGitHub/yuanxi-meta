@@ -356,3 +356,100 @@ if (copyScriptBtn) {
     }, 1600);
   });
 }
+
+/* ---------- 选题池（保存在本机浏览器） ---------- */
+const ideaForm = document.getElementById("ideaForm");
+const ideaInput = document.getElementById("ideaInput");
+const ideaList = document.getElementById("ideaList");
+const ideaEmpty = document.getElementById("ideaEmpty");
+const exportIdeasBtn = document.getElementById("exportIdeas");
+
+const IDEA_STORAGE_KEY = "yuanxi-meta-ideas";
+let ideas = [];
+
+function loadIdeas() {
+  try {
+    const raw = localStorage.getItem(IDEA_STORAGE_KEY);
+    const parsed = raw ? JSON.parse(raw) : [];
+    ideas = Array.isArray(parsed) ? parsed : [];
+  } catch {
+    ideas = [];
+  }
+}
+
+function saveIdeas() {
+  try {
+    localStorage.setItem(IDEA_STORAGE_KEY, JSON.stringify(ideas));
+  } catch {
+    /* 浏览器禁用存储时，记录仅在当前页面有效 */
+  }
+}
+
+function todayStamp() {
+  const now = new Date();
+  return `${String(now.getMonth() + 1).padStart(2, "0")}-${String(now.getDate()).padStart(2, "0")}`;
+}
+
+function renderIdeas() {
+  if (!ideaList) return;
+
+  ideaList.innerHTML = ideas
+    .map(
+      (idea) => `
+        <li class="idea-item">
+          <span class="idea-mark" aria-hidden="true">○</span>
+          <span class="idea-text">${escapeText(idea.text)}</span>
+          <time class="idea-date">${escapeText(idea.date)}</time>
+          <button class="idea-del" type="button" data-id="${escapeText(idea.id)}" aria-label="删除这条选题">×</button>
+        </li>`
+    )
+    .join("");
+
+  if (ideaEmpty) ideaEmpty.hidden = ideas.length > 0;
+}
+
+if (ideaForm) {
+  loadIdeas();
+  renderIdeas();
+
+  ideaForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+    const text = ideaInput.value.trim();
+    if (!text) return;
+
+    ideas.unshift({
+      id: `${Date.now().toString(36)}${Math.random().toString(36).slice(2, 6)}`,
+      text,
+      date: todayStamp()
+    });
+
+    saveIdeas();
+    renderIdeas();
+    ideaInput.value = "";
+    ideaInput.focus();
+  });
+
+  ideaList.addEventListener("click", (event) => {
+    const button = event.target.closest(".idea-del");
+    if (!button) return;
+
+    ideas = ideas.filter((idea) => idea.id !== button.dataset.id);
+    saveIdeas();
+    renderIdeas();
+  });
+
+  if (exportIdeasBtn) {
+    exportIdeasBtn.addEventListener("click", async () => {
+      if (!ideas.length) return;
+
+      const text = ["选题池", ...ideas.map((idea, index) => `${index + 1}. ${idea.text}`)].join("\n");
+      await copyToClipboard(text);
+
+      const original = exportIdeasBtn.textContent;
+      exportIdeasBtn.textContent = "已复制";
+      setTimeout(() => {
+        exportIdeasBtn.textContent = original;
+      }, 1600);
+    });
+  }
+}
